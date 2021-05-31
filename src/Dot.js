@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 const Dot = ({ isLight, selected }) => {
   let backgroundColor;
   if (isLight) {
-    backgroundColor = selected ? 'rgba(0, 0, 0, 0.8)' : 'rgba(0, 0, 0, 0.3)';
+    backgroundColor = selected ? '#1B5887' : '#F4F4F4';
   } else {
-    backgroundColor = selected ? '#fff' : 'rgba(255, 255, 255, 0.5)';
+    backgroundColor = selected ? '#1B5887' : '#F4F4F4';
   }
   return (
     <View
@@ -26,10 +26,10 @@ Dot.propTypes = {
 
 const styles = {
   dot: {
-    width: 6,
-    height: 6,
-    borderRadius: 3,
-    marginHorizontal: 3,
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    marginHorizontal: 4
   },
 };
 

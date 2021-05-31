@@ -34,6 +34,7 @@ class Onboarding extends Component {
       height: null,
       backgroundColorAnim: new Animated.Value(0),
     };
+    this._isMounted = false
   }
 
   componentDidUpdate() {
@@ -42,12 +43,17 @@ class Onboarding extends Component {
       duration: this.props.transitionAnimationDuration,
       useNativeDriver: false,
     }).start();
+    if(!this._isMounted && this.flatList) {
+      this._isMounted = true;
+      this.autoSwipe = setInterval(this.autoSwipeSupport, this.props.autoSwipeTimeout || 3000);
+    }
   }
 
   onSwipePageChange = ({ viewableItems }) => {
     if (!viewableItems[0] || this.state.currentPage === viewableItems[0].index)
       return;
 
+    clearInterval(this.autoSwipe);
     this.setState((state) => {
       this.props.pageIndexCallback &&
         this.props.pageIndexCallback(viewableItems[0].index);
@@ -92,7 +98,7 @@ class Onboarding extends Component {
         isLight={isLight}
         image={image}
         title={title}
-        subtitle={subtitle}
+        subtitle={subtitle || ''}
         width={this.state.width || Dimensions.get('window').width}
         height={this.state.height || Dimensions.get('window').height}
         containerStyles={containerStyles}
@@ -111,6 +117,23 @@ class Onboarding extends Component {
       />
     );
   };
+
+  autoSwipeSupport = () => {
+    const { currentPage } = this.state;
+    const maxSlider = this.props.pages.length;
+    let nextIndex = 0;
+    if (currentPage < maxSlider - 1) {
+      nextIndex = currentPage + 1;
+      this.goNext();
+      this.setState({ currentPage: nextIndex });
+    } else if(currentPage === maxSlider - 1) {
+      clearInterval(this.autoSwipe);
+    }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.autoSwipe);
+  }
 
   render() {
     const {
@@ -166,11 +189,11 @@ class Onboarding extends Component {
     const skipFun =
       skipToPage != null
         ? () => {
-            this.flatList.scrollToIndex({
-              animated: true,
-              index: skipToPage,
-            });
-          }
+          this.flatList.scrollToIndex({
+            animated: true,
+            index: skipToPage,
+          });
+        }
         : onSkip;
 
     return (
@@ -237,8 +260,6 @@ Onboarding.propTypes = {
         PropTypes.element,
         PropTypes.func,
       ]).isRequired,
-      subtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
-        .isRequired,
     })
   ).isRequired,
   bottomBarHighlight: PropTypes.bool,
@@ -270,7 +291,7 @@ Onboarding.propTypes = {
 
 Onboarding.defaultProps = {
   bottomBarHighlight: true,
-  bottomBarHeight: 60,
+  bottomBarHeight: 150,
   bottomBarColor: 'transparent',
   controlStatusBar: true,
   showPagination: true,

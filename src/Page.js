@@ -75,25 +75,19 @@ const potrait = height > width;
 const styles = {
   container: {
     flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: potrait ? 'center' : 'flex-start',
-    paddingTop: potrait ? 0 : 10,
+    alignItems: 'center'
   },
   imageContainer: {
-    flex: 0,
-    paddingBottom: potrait ? 60 : 10,
-    alignItems: 'center',
-    width: '100%',
+    width: '100%'
   },
   padding: {
-    paddingHorizontal: 10,
+    paddingHorizontal: 16
   },
   title: {
     textAlign: 'center',
     fontSize: 26,
     color: '#fff',
-    paddingBottom: 15,
+    paddingBottom: 16
   },
   titleLight: {
     color: '#000',

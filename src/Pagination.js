@@ -30,7 +30,7 @@ const Pagination = ({
       ? currentPage === 0
       : currentPage + 1 === numPages;
 
-  const SkipButtonFinal = showSkip && !isLastPage && (
+  const SkipButtonFinal = showSkip  && (
     <SkipButtonComponent
       isLight={isLight}
       skipLabel={skipLabel}
@@ -46,7 +46,7 @@ const Pagination = ({
     />
   );
 
-  const NextButtonFinal = showNext && !isLastPage && (
+  const NextButtonFinal = showNext && (
     <NextButtonComponent
       nextLabel={nextLabel}
       allowFontScaling={allowFontScaling}
@@ -55,7 +55,7 @@ const Pagination = ({
     />
   );
 
-  const DoneButtonFinal = showDone && isLastPage && (
+  const DoneButtonFinal = showDone && (
     <DoneButtonComponent
       isLight={isLight}
       allowFontScaling={allowFontScaling}
@@ -78,7 +78,6 @@ const Pagination = ({
         ...styles.container,
       }}
     >
-      <View style={styles.buttonLeft}>{SkipButtonFinal}</View>
       <Dots
         isLight={isLight}
         numPages={numPages}
@@ -86,9 +85,9 @@ const Pagination = ({
         Dot={DotComponent}
         style={styles.dots}
       />
-      <View style={styles.buttonRight}>
+      <View style={styles.buttonTop}>{SkipButtonFinal}</View>
+      <View style={styles.buttonBottom}>
         {NextButtonFinal}
-        {DoneButtonFinal}
       </View>
     </View>
   );
@@ -123,23 +122,18 @@ Pagination.propTypes = {
 
 const styles = {
   container: {
-    paddingHorizontal: 0,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
-  buttonLeft: {
-    width: 200,
-    flexShrink: 1,
-    alignItems: 'flex-start',
+  buttonTop: {
+    marginTop: 24,
+    width: '100%'
   },
-  buttonRight: {
-    width: 200,
-    flexShrink: 1,
-    alignItems: 'flex-end',
+  buttonBottom: {
+    width: '100%'
   },
   dots: {
-    flexShrink: 0,
+    width: '100%'
   },
 };
 
