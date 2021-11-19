@@ -24,6 +24,8 @@ const Pagination = ({
   NextButtonComponent,
   DoneButtonComponent,
   DotComponent,
+  selectedDotColor,
+  dotColor
 }) => {
   const isLastPage =
     I18nManager.isRTL && Platform.OS == 'ios'
@@ -69,7 +71,6 @@ const Pagination = ({
       }}
     />
   );
-
   return (
     <View
       style={{
@@ -84,6 +85,8 @@ const Pagination = ({
         currentPage={currentPage}
         Dot={DotComponent}
         style={styles.dots}
+        selectedDotColor={selectedDotColor}
+        dotColor={dotColor}
       />
       <View style={styles.buttonTop}>{SkipButtonFinal}</View>
       <View style={styles.buttonBottom}>
@@ -118,6 +121,8 @@ Pagination.propTypes = {
     .isRequired,
   DotComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func])
     .isRequired,
+    selectedDotColor: PropTypes.string,
+    dotColor: PropTypes.string
 };
 
 const styles = {

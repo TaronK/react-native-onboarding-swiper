@@ -2,10 +2,10 @@ import React from 'react';
 import { I18nManager, Platform, View } from 'react-native';
 import PropTypes from 'prop-types';
 
-const Dots = ({ isLight, numPages, currentPage, Dot }) => (
+const Dots = ({ isLight, numPages, currentPage, Dot, selectedDotColor, dotColor }) => (
   <View style={styles.container}>
     {[...Array(numPages)].map((_, index) => (
-      <Dot key={index} selected={index === currentPage} isLight={isLight} />
+      <Dot key={index} selected={index === currentPage} isLight={isLight} selectedDotColor={selectedDotColor} dotColor={dotColor}/>
     ))}
   </View>
 );

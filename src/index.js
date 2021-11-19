@@ -157,6 +157,8 @@ class Onboarding extends Component {
       DotComponent,
       flatlistProps,
       skipToPage,
+      selectedDotColor,
+      dotColor
     } = this.props;
     const currentPage = pages[this.state.currentPage];
     const currentBackgroundColor = currentPage.backgroundColor;
@@ -242,6 +244,8 @@ class Onboarding extends Component {
               DoneButtonComponent={DoneButtonComponent}
               NextButtonComponent={NextButtonComponent}
               DotComponent={DotComponent}
+              selectedDotColor={selectedDotColor}
+              dotColor={dotColor}
             />
           </SafeAreaView>
         )}

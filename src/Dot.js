@@ -2,12 +2,14 @@ import React from 'react';
 import { View } from 'react-native';
 import PropTypes from 'prop-types';
 
-const Dot = ({ isLight, selected }) => {
+const Dot = ({ isLight, selected, selectedDotColor, dotColor }) => {
   let backgroundColor;
+  let defaultSelectedDotColor = selectedDotColor || '#1B5887';
+  let defaultDotColor = dotColor || '#F4F4F4';
   if (isLight) {
-    backgroundColor = selected ? '#1B5887' : '#F4F4F4';
+    backgroundColor = selected ? defaultSelectedDotColor : defaultDotColor;
   } else {
-    backgroundColor = selected ? '#1B5887' : '#F4F4F4';
+    backgroundColor = selected ? defaultSelectedDotColor : defaultDotColor;
   }
   return (
     <View
