@@ -205,7 +205,8 @@ class Onboarding extends Component {
       >
         {controlStatusBar && <StatusBar barStyle={barStyle} />}
         <FlatList
-          ref={(list) => {
+          bounces={false}
+	  ref={(list) => {
             this.flatList = list;
           }}
           data={pages}
