@@ -1,4 +1,6 @@
-import { Dimensions, Text, View, ViewPropTypes } from 'react-native';
+import { Dimensions, Text, View } from 'react-native';
+import { ViewPropTypes } from 'deprecated-react-native-prop-types';
+
 import PropTypes from 'prop-types';
 import React from 'react';
 
