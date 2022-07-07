@@ -5,8 +5,7 @@ import {
   I18nManager,
   StatusBar,
   SafeAreaView,
-  ViewPropTypes,
-  Text,
+  View,
 } from 'react-native';
 
 import PropTypes from 'prop-types';
@@ -72,6 +71,13 @@ class Onboarding extends Component {
         I18nManager.isRTL && Platform.OS == 'ios'
           ? this.state.currentPage - 1
           : this.state.currentPage + 1,
+    });
+  };
+
+  goToPage = (index, animated=true) => {
+    this.flatList.scrollToIndex({
+      index,
+      animated,
     });
   };
 
@@ -283,12 +289,20 @@ Onboarding.propTypes = {
   DoneButtonComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
   NextButtonComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
   DotComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-  containerStyles: ViewPropTypes.style,
-  imageContainerStyles: ViewPropTypes.style,
+  containerStyles: PropTypes.shape({
+    style: PropTypes.any,
+  }),
+  imageContainerStyles: PropTypes.shape({
+    style: PropTypes.any,
+  }),
   allowFontScalingText: PropTypes.bool,
   allowFontScalingButtons: PropTypes.bool,
-  titleStyles: Text.propTypes.style,
-  subTitleStyles: Text.propTypes.style,
+  titleStyles: PropTypes.shape({
+    style: PropTypes.any,
+  }),
+  subTitleStyles: PropTypes.shape({
+    style: PropTypes.any,
+  }),
   transitionAnimationDuration: PropTypes.number,
   skipToPage: PropTypes.number,
   pageIndexCallback: PropTypes.func,
